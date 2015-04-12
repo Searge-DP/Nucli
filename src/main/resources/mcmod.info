@@ -1,0 +1,17 @@
+[
+  {
+    "modid": "Nucli",
+    "name": "Nucli",
+    "version": "${version}",
+    "mcversion": "${mc_version}",
+    "description": "Another damn core mod, for helping with tedious or repetitively used functions and whatnot.",
+    "credits": "",
+    "url": "www.robrit.com",
+    "updateUrl": "",
+    "authorList": ["TheRoBrit"],
+    "logoFile": "",
+    "screenshots": [],
+    "parent":"",
+    "dependencies": ["mod_MinecraftForge"]
+  }
+]
