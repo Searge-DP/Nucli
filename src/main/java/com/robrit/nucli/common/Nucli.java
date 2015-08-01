@@ -19,9 +19,11 @@
 
 package com.robrit.nucli.common;
 
+import com.robrit.nucli.common.mod.ForgeMod;
+import com.robrit.nucli.common.mod.IMod;
+import com.robrit.nucli.common.mod.Logger;
 import com.robrit.nucli.common.proxy.IProxy;
-import com.robrit.nucli.common.util.LogHelper;
-import com.robrit.nucli.common.util.ModInformation;
+import com.robrit.nucli.common.ref.ModInformation;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -29,57 +31,66 @@ import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = ModInformation.MOD_ID, name = ModInformation.MOD_NAME,
-     version = ModInformation.MOD_VERSION, dependencies = ModInformation.MOD_DEPENDENCIES,
-     certificateFingerprint = ModInformation.MOD_FINGERPRINT)
-public class Nucli {
+    version = ModInformation.MOD_VERSION, dependencies = ModInformation.MOD_DEPENDENCIES,
+    certificateFingerprint = ModInformation.MOD_FINGERPRINT)
+public class Nucli extends ForgeMod {
+
+  public static final Logger logger = new Logger(ModInformation.MOD_ID);
 
   @Mod.Instance(ModInformation.MOD_ID)
-  private static Nucli instance;
+  private static IMod instance;
 
   @SidedProxy(clientSide = ModInformation.PROXY_CLIENT_LOCATION,
               serverSide = ModInformation.PROXY_SERVER_LOCATION)
+
   private static IProxy proxy;
 
-  public static Nucli getInstance() {
+  public static IMod getInstance() {
     return instance;
   }
-
   public static IProxy getProxy() {
     return proxy;
   }
 
   @Mod.EventHandler
   public static void preInit(FMLPreInitializationEvent event) {
+
     if (ModInformation.DEBUG_MODE) {
-      LogHelper.info(String.format("Finished pre-initialisation stage for %s",
-                                   ModInformation.MOD_ID));
+      logger.info(String.format("Finished pre-initialisation stage for %s",
+                                ModInformation.MOD_ID));
     }
   }
 
   @Mod.EventHandler
   public static void init(FMLInitializationEvent event) {
     if (ModInformation.DEBUG_MODE) {
-      LogHelper.info(String.format("Finished initialisation stage for %s",
-                                   ModInformation.MOD_ID));
+      logger.info(String.format("Finished initialisation stage for %s",
+                                ModInformation.MOD_ID));
     }
   }
 
   @Mod.EventHandler
   public static void postInit(FMLPostInitializationEvent event) {
     if (ModInformation.DEBUG_MODE) {
-      LogHelper.info(String.format("Finished post-initialisation stage for %s",
-                                   ModInformation.MOD_ID));
+      logger.info(String.format("Finished post-initialisation stage for %s",
+                                ModInformation.MOD_ID));
     }
+  }
+
+  @Mod.EventHandler
+  public static void onServerStarting(FMLServerStartingEvent event) {
+
   }
 
   @Mod.EventHandler
   public void invalidFingerprint(FMLFingerprintViolationEvent event) {
     if (ModInformation.MOD_FINGERPRINT.equals("@FINGERPRINT@")) {
-      LogHelper.error("No fingerprint found!");
+      logger.error("No fingerprint found!");
     } else {
-      LogHelper.warn("Invalid fingerprint found!");
+      logger.warn("Invalid fingerprint found!");
     }
   }
 }
