@@ -1,5 +1,5 @@
 /*
- * LogHelper.java
+ * Logger.java
  *
  * Copyright (c) 2015 TheRoBrit
  *
@@ -17,93 +17,53 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.robrit.nucli.common.util;
+package com.robrit.nucli.common.mod;
 
 import net.minecraftforge.fml.common.FMLLog;
 
 import org.apache.logging.log4j.Level;
 
-public class LogHelper {
+public class Logger {
 
-  /**
-   * 
-   *  
-   * @param logLevel
-   * @param object
-   */
-  public static void log(final Level logLevel, final Object object) {
-    FMLLog.log(ModInformation.MOD_NAME, logLevel, String.valueOf(object));
+  private String modName;
+
+  public Logger(String modName) {
+    this.modName = modName;
   }
 
-  /**
-   * 
-   *
-   * @param object
-   */
-  public static void all(final Object object) {
+  public void log(final Level logLevel, final Object object) {
+    FMLLog.log(modName, logLevel, String.valueOf(object));
+  }
+
+  public void all(final Object object) {
     log(Level.ALL, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */  
-  public static void debug(final Object object) {
+  public void debug(final Object object) {
     log(Level.DEBUG, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */
-  public static void error(final Object object) {
+  public void error(final Object object) {
     log(Level.ERROR, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */
-  public static void fatal(final Object object) {
+  public void fatal(final Object object) {
     log(Level.FATAL, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */
-  public static void info(final Object object) {
+  public void info(final Object object) {
     log(Level.INFO, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */
-  public static void off(final Object object) {
+  public void off(final Object object) {
     log(Level.OFF, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */
-  public static void trace(final Object object) {
+  public void trace(final Object object) {
     log(Level.TRACE, object);
   }
 
-  /**
-   *
-   *
-   * @param object
-   */
-  public static void warn(final Object object) {
+  public void warn(final Object object) {
     log(Level.WARN, object);
   }
 }
