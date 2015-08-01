@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.robrit.nucli.common.util;
+package com.robrit.nucli.common.ref;
 
 public class ModInformation {
 
