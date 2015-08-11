@@ -1,0 +1,17 @@
+language: java
+jdk:
+  - oraclejdk7
+  - openjdk7
+
+before_install:
+  - chmod +x gradlew
+
+install:
+  - ./gradle setupCIWorkspace -S
+
+script:
+  - ./gradle build -S
+
+notifications:
+  email: false
+  slack: #build
